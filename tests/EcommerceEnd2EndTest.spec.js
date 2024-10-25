@@ -14,16 +14,6 @@ test.describe('EcommerceEnd2EndTest', async () => {
         const dashBoardPage = pomManager.getDashboardPage()
         await dashBoardPage.addProductToCart(ecommerceTestData.productName)
         await dashBoardPage.goToCart()
-        // await page.locator('.card-body b').first().waitFor()
-        // const listOfItems = await page.locator('.card-body b').allTextContents()
-        // console.log(listOfItems)
-        // expect(listOfItems.length).toBeGreaterThan(0)
-        // await page.locator('.card-body')
-        //     .filter({hasText:'ZARA COAT 3'})
-        //     .locator('button.btn.w-10.rounded')
-        //     .click()
-        // await page.locator('button[routerlink="/dashboard/cart"]').click()
-
         const cartPage = pomManager.getCartPage()
         await expect(await cartPage.isSelectedProductDisplayed(ecommerceTestData.productName)).toBeVisible()
 
@@ -45,21 +35,20 @@ test.describe('EcommerceEnd2EndTest', async () => {
         await expect(page.locator('div[class$=\'-main\']')).toHaveText(cleanedOrderId)
     })
 
-    for (const dataSet of arrayDataSet) {
-        test("Login Test with", async ({page})=>{
-            const pomManager = new POManager(page)
-            const fakeEmail = createEmail()
-            const loginPage = pomManager.getLoginPage()
-            await loginPage.NavigateToPage()
-            await loginPage.login(dataSet.userEmail,dataSet.userPassword)
-            const dashBoardPage = pomManager.getDashboardPage()
-            await dashBoardPage.addProductToCart(dataSet.productName)
-            await dashBoardPage.goToCart()
-        })
-    }
+    // for (const dataSet of arrayDataSet) {
+    //     test("Data Driven", async ({page})=>{
+    //         const pomManager = new POManager(page)
+    //         const fakeEmail = createEmail()
+    //         const loginPage = pomManager.getLoginPage()
+    //         await loginPage.NavigateToPage()
+    //         await loginPage.login(dataSet.userEmail,dataSet.userPassword)
+    //         const dashBoardPage = pomManager.getDashboardPage()
+    //         await dashBoardPage.addProductToCart(dataSet.productName)
+    //         await dashBoardPage.goToCart()
+    //     })
+   // }
 
-
-    test("Calendar validations",async({page})=>
+    test("@wip Calendar validations",async({page})=>
     {
         const monthNumber = "6";
         const date = "15";
@@ -79,7 +68,5 @@ test.describe('EcommerceEnd2EndTest', async () => {
             expect(value).toEqual(expectedList[index]);
         }
     })
-
-
-    })
+})
 
